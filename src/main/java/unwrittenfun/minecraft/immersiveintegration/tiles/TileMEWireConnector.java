@@ -121,6 +121,13 @@ public class TileMEWireConnector extends TileWireConnector implements IGridHost,
     }
   }
 
+  @Override
+  public void onChunkUnload() {
+    if (worldObj != null && !worldObj.isRemote) {
+      destroyAELink();
+    }
+  }
+
   /// IGridBlock
 
   @Override
