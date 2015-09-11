@@ -56,6 +56,13 @@ public class ClientProxy extends CommonProxy {
         new ManualPages.Text(manual, "industrialCokeOven1"),
         new ManualPageMultiblock(manual, "industrialCokeOven2", IIMultiblocks.industrialCokeOven)
     );
+
+    manual.addEntry("heavyFarmingStation", "immersiveintegration",
+        new ManualPages.CraftingMulti(manual, "heavyFarmingStation0", new ItemStack(IIBlocks.steelDecoration, 1, 3)),
+        new ManualPages.Text(manual, "heavyFarmingStation1"),
+        new ManualPageMultiblock(manual, "heavyFarmingStation2", IIMultiblocks.heavyFarmingStation)
+    );
+
     manual.addEntry("itemRobin", "immersiveintegration",
         new ManualPages.Crafting(manual, "itemRobin0", new ItemStack(IIBlocks.itemRobin)),
         new ManualPages.Text(manual, "itemRobin1")

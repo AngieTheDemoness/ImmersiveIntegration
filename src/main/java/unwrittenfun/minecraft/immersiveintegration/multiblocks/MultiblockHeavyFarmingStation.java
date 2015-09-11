@@ -1,39 +1,49 @@
 package unwrittenfun.minecraft.immersiveintegration.multiblocks;
 
 import blusunrize.immersiveengineering.api.MultiblockHandler.IMultiblock;
+import blusunrize.immersiveengineering.common.IEContent;
+import blusunrize.immersiveengineering.common.blocks.metal.ItemBlockMetalDecorations;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
-import unwrittenfun.minecraft.immersiveintegration.ImmersiveIntegration;
 import unwrittenfun.minecraft.immersiveintegration.blocks.IIBlocks;
 import unwrittenfun.minecraft.immersiveintegration.tiles.IMultiblockTile;
 
-public class MultiblockIndustrialCokeOven implements IMultiblock {
-  public static ItemStack[][][] blockStructure = new ItemStack[4][5][7];
-  public static ItemStack[][][][] targetStructure = new ItemStack[4][5][7][2];
+public class MultiblockHeavyFarmingStation implements IMultiblock {
+  public static ItemStack[][][] blockStructure = new ItemStack[4][5][5];
+  public static ItemStack[][][][] targetStructure = new ItemStack[4][5][5][2];
 
   static {
     for (int h = 0; h < 4; h++) {
       for (int l = 0; l < 5; l++) {
-        for (int w = 0; w < 7; w++) {
-          if ((h == 0 && (w == 0 || w == 2 || w == 4 || w == 6) && (l == 0 || l == 4)) || (h == 1 && (w == 0 || w == 6) && l == 2)) {
-            blockStructure[h][l][w] = new ItemStack(IIBlocks.steelDecoration, 1, 2);
-          } else if (w == 1 || w == 3 || w == 5) {
-            blockStructure[h][l][w] = new ItemStack(IIBlocks.steelDecoration, 1, 1);
+        for (int w = 0; w < 5; w++) {
+          if ((h == 1 && (w == 2 && (l == 0 || l == 4 ))) || (h == 1 && (l == 2 && (w == 0 || w == 4 )))) {
+            blockStructure[h][l][w] = new ItemStack(IIBlocks.steelDecoration, 1, 3);
+          } else if ((h == 0 && w == 2 && l == 2) || (h == 2 && w == 2 && l == 2) || (h == 1 && (w == 2 && (l == 1 || l == 3))) || (h == 1 && (l == 2 && (w == 1 || w == 3)))) {
+            blockStructure[h][l][w] = new ItemStack(IEContent.blockMetalDecoration, 1, 10);
+          } else if ((h == 3 && (w == 2 && (l == 0 || l == 4 ))) || (h == 3 && (l == 2 && (w == 0 || w == 4 )))) {
+            blockStructure[h][l][w] = new ItemStack(IEContent.blockMetalDevice2, 1, 5);
+          } else if ((h == 0 && (w == 0 && (l == 0 || l == 4))) || (h == 0 && (w == 4 && (l == 0 || l == 4))) || (h == 1 && (w == 0 && (l == 0 || l == 4))) || (h == 1 && (w == 4 && (l == 0 || l == 4))) || (h == 2 && (w == 0 && (l == 0 || l == 4))) || (h == 2 && (w == 4 && (l == 0 || l == 4))) || (h == 3 && (w == 1 && (l == 0 || l == 4))) || (h == 3 && (w == 3 && (l == 0 || l == 4))) || (h == 3 && (w == 0 && (l == 1 || l == 3))) || (h == 3 && (w == 4 && (l == 1 || l == 3)))) {
+            blockStructure[h][l][w] = new ItemStack(IEContent.blockMetalDecoration, 1, 0);
+          } else if (((h == 0 && ((w == 0 || w == 4) && (l == 1 || l == 3))) || (h == 0 && ((l == 0 || l == 4) && (w == 1 || w == 3)))) || ((h == 1 && ((w == 0 || w == 4) && (l == 1 || l == 3))) || (h == 1 && ((l == 0 || l == 4) && (w == 1 || w == 3)))) || ((h == 2 && ((w == 0 || w == 4) && (l == 1 || l == 3))) || (h == 2 && ((l == 0 || l == 4) && (w == 1 || w == 3)))) || (h == 3 && (w == 1 || w == 3 || l == 1 || l == 3))) {
+            blockStructure[h][l][w] = new ItemStack(IEContent.blockStorage, 1, 7);
+          } else if ((h == 1 && w == 2 && l == 2 ) || (h == 3 && (w == 0 && (l == 0 || l == 4))) || (h == 3 && (w == 4 && (l == 0 || l == 4)))) {
+
           } else {
-            blockStructure[h][l][w] = new ItemStack(IIBlocks.steelDecoration, 1, 0);
+            blockStructure[h][l][w] = new ItemStack(IEContent.blockMetalDecoration, 1, 5);
           }
 
           if (h == 1 && l == 2 && w == 3) {
-            targetStructure[h][l][w][0] = new ItemStack(IIBlocks.industrialCokeOven, 1, 1);
-            targetStructure[h][l][w][1] = new ItemStack(IIBlocks.industrialCokeOven, 1, 2);
+            targetStructure[h][l][w][0] = new ItemStack(IIBlocks.heavyFarmingStation, 1, 0);
+            targetStructure[h][l][w][1] = new ItemStack(IIBlocks.heavyFarmingStation, 1, 0);
           } else {
-            targetStructure[h][l][w][0] = new ItemStack(IIBlocks.industrialCokeOven, 1, 3);
-            targetStructure[h][l][w][1] = new ItemStack(IIBlocks.industrialCokeOven, 1, 3);
+            targetStructure[h][l][w][0] = new ItemStack(IIBlocks.heavyFarmingStation, 1, 1);
+            targetStructure[h][l][w][1] = new ItemStack(IIBlocks.heavyFarmingStation, 1, 1);
           }
         }
       }
@@ -42,7 +52,7 @@ public class MultiblockIndustrialCokeOven implements IMultiblock {
 
   @Override
   public boolean isBlockTrigger(Block b, int meta) {
-    return b == IIBlocks.steelDecoration && meta == 1;
+    return b == IIBlocks.steelDecoration && meta == 3;
   }
 
   @Override
@@ -111,9 +121,12 @@ public class MultiblockIndustrialCokeOven implements IMultiblock {
   @Override
   public ItemStack[] getTotalMaterials() {
     return new ItemStack[] {
-        new ItemStack(IIBlocks.steelDecoration, 70, 0),
-        new ItemStack(IIBlocks.steelDecoration, 60, 1),
-        new ItemStack(IIBlocks.steelDecoration, 10, 2)
+        new ItemStack(IIBlocks.steelDecoration, 4, 3),
+        new ItemStack(IEContent.blockMetalDevice2, 4, 5),
+        new ItemStack(IEContent.blockMetalDecoration, 6, 10),
+        new ItemStack(IEContent.blockMetalDecoration, 20, 0),
+        new ItemStack(IEContent.blockStorage, 28, 7),
+        new ItemStack(IEContent.blockMetalDecoration, 33, 5)
     };
   }
 

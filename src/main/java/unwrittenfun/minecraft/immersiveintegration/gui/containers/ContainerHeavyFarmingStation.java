@@ -1,0 +1,120 @@
+package unwrittenfun.minecraft.immersiveintegration.gui.containers;
+
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.inventory.Container;
+import net.minecraft.inventory.ICrafting;
+import net.minecraft.inventory.Slot;
+import net.minecraft.item.ItemStack;
+import unwrittenfun.minecraft.immersiveintegration.client.gui.SlotValid;
+import unwrittenfun.minecraft.immersiveintegration.tiles.TileHeavyFarmingStation;
+import unwrittenfun.minecraft.immersiveintegration.tiles.TileIndustrialCokeOven;
+
+public class ContainerHeavyFarmingStation extends Container {
+  public TileHeavyFarmingStation farmingStation;
+  public InventoryPlayer inventoryPlayer;
+  public int prevFluidAmount = 0;
+  public int[] prevProgressValues = new int[4];
+
+  public ContainerHeavyFarmingStation(TileHeavyFarmingStation farmingStation, InventoryPlayer inventoryPlayer) {
+    this.farmingStation = farmingStation;
+    this.inventoryPlayer = inventoryPlayer;
+
+    for (int i = 0; i < 3; i++) {
+      for (int j = 0; j < 9; j++) {
+        addSlotToContainer(new Slot(inventoryPlayer, j + i * 9 + 9, 8 + j * 18, 85 + i * 18));
+      }
+    }
+
+    for (int i = 0; i < 9; i++) {
+      addSlotToContainer(new Slot(inventoryPlayer, i, 8 + i * 18, 143));
+    }
+
+    for (int i = 0; i < 4; i++) {
+      addSlotToContainer(new SlotValid(farmingStation, i * 2, 14 + 28 * i, 13));
+      addSlotToContainer(new SlotValid(farmingStation, i * 2 + 1, 14 + 28 * i, 55));
+    }
+
+    addSlotToContainer(new SlotValid(farmingStation, 8, 146, 17));
+    addSlotToContainer(new SlotValid(farmingStation, 9, 146, 53));
+  }
+
+  @Override
+  public boolean canInteractWith(EntityPlayer player) {
+    return true;
+  }
+
+  @Override
+  public ItemStack transferStackInSlot(EntityPlayer player, int i) {
+    Slot slot = getSlot(i);
+    if (slot != null && slot.getHasStack()) {
+      ItemStack stack = slot.getStack();
+      ItemStack result = stack.copy();
+      if (i >= 36) {
+        if (!mergeItemStack(stack, 0, 36, false)) return null;
+      } else {
+        boolean merged = false;
+        for (int j = 0; j < farmingStation.getSizeInventory(); j++) {
+          if (farmingStation.isItemValidForSlot(j, stack)) {
+            if (mergeItemStack(stack, 36 + j, 37 + j, false)) {
+              merged = true;
+              break;
+            }
+          }
+        }
+        if (!merged) return null;
+      }
+      if (stack.stackSize == 0) slot.putStack(null);
+      else slot.onSlotChanged();
+      slot.onPickupFromSlot(player, stack);
+      return result;
+    }
+    return null;
+  }
+
+  @Override
+  public void addCraftingToCrafters(ICrafting crafter) {
+    super.addCraftingToCrafters(crafter);
+
+    crafter.sendProgressBarUpdate(this, 4, farmingStation.tank.getFluidAmount());
+
+    for (int i = 0; i < 4; i++) {
+      crafter.sendProgressBarUpdate(this, i, farmingStation.getProgressFor(i));
+    }
+  }
+
+  @Override
+  public void detectAndSendChanges() {
+    super.detectAndSendChanges();
+    if (prevFluidAmount != farmingStation.tank.getFluidAmount()) {
+      prevFluidAmount = farmingStation.tank.getFluidAmount();
+      for (Object crafter : crafters) {
+        ((ICrafting) crafter).sendProgressBarUpdate(this, 4, prevFluidAmount);
+      }
+    }
+
+    for (int i = 0; i < 4; i++) {
+      if (prevProgressValues[i] != farmingStation.getProgressFor(i)) {
+        prevProgressValues[i] = farmingStation.getProgressFor(i);
+        for (Object crafter : crafters) {
+          ((ICrafting) crafter).sendProgressBarUpdate(this, i, prevProgressValues[i]);
+        }
+      }
+    }
+  }
+
+  @Override
+  public void updateProgressBar(int id, int value) {
+    switch (id) {
+      case 0:
+      case 1:
+      case 2:
+      case 3:
+        farmingStation.clientProgress[id] = value;
+        break;
+      case 4:
+        farmingStation.clientFluidAmount = value;
+        break;
+    }
+  }
+}

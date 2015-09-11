@@ -22,12 +22,13 @@ public class IIBlocks {
   public static final String STEEL_TRAPDOOR = "steelTrapdoor";
   public static final String REDSTONE_WIRE_CONNECTOR_KEY = "redstoneWireConnector";
   public static final String INDUSTRIAL_COKE_OVEN = "industrialCokeOven";
+  public static final String HEAVY_FARMING_STATION = "heavyFarmingStation";
   public static final String ITEM_ROBIN_KEY = "itemRobin";
   public static final String ME_TRANSFORMER_KEY = "meTransformer";
   public static final String ME_DENSE_TRANSFORMER_KEY = "meDenseTransformer";
   public static final String STEEL_BLOCKS_KEY = "steelDecoration";
   public static final String[] STEEL_BLOCKS_KEYS = new String[] {
-      "OvenWall", "OvenWallHeated", "OvenWallPort"
+      "OvenWall", "OvenWallHeated", "OvenWallPort", "FarmerWaterSprinkler"
   };
   public static final String AE_DECORATIONS_KEY = "aeDecoration";
   public static final String[] AE_DECORATION_KEYS = new String[] {
@@ -43,6 +44,7 @@ public class IIBlocks {
   public static Block steelTrapdoor;
   public static Block redstoneWireConnector;
   public static BlockIndustrialCokeOven industrialCokeOven;
+  public static BlockHeavyFarmingStation heavyFarmingStation;
   public static Block itemRobin;
   public static Block steelDecoration;
 
@@ -51,6 +53,7 @@ public class IIBlocks {
     steelTrapdoor = new BlockSteelTrapdoor(ModInfo.MOD_ID + ":" + STEEL_TRAPDOOR);
     redstoneWireConnector = new BlockRedstoneWireConnector(ModInfo.MOD_ID + ":" + REDSTONE_WIRE_CONNECTOR_KEY);
     industrialCokeOven = new BlockIndustrialCokeOven(ModInfo.MOD_ID + ":" + INDUSTRIAL_COKE_OVEN);
+    heavyFarmingStation = new BlockHeavyFarmingStation(ModInfo.MOD_ID + ":" + HEAVY_FARMING_STATION);
     itemRobin = new BlockItemRobin(ModInfo.MOD_ID + ":" + ITEM_ROBIN_KEY);
     steelDecoration = new BlockSteelDecoration(ModInfo.MOD_ID + ":" + STEEL_BLOCKS_KEY, STEEL_BLOCKS_KEYS);
 
@@ -58,12 +61,14 @@ public class IIBlocks {
     GameRegistry.registerBlock(steelTrapdoor, STEEL_TRAPDOOR);
     GameRegistry.registerBlock(redstoneWireConnector, REDSTONE_WIRE_CONNECTOR_KEY);
     GameRegistry.registerBlock(industrialCokeOven, INDUSTRIAL_COKE_OVEN);
+    GameRegistry.registerBlock(heavyFarmingStation, HEAVY_FARMING_STATION);
     GameRegistry.registerBlock(itemRobin, ITEM_ROBIN_KEY);
     GameRegistry.registerBlock(steelDecoration, ItemBlockSteelDecoration.class, STEEL_BLOCKS_KEY);
 
     GameRegistry.registerTileEntity(TileExtendedPost.class, ModInfo.MOD_ID + ":" + EXTENDED_POST_KEY + "Tile");
     GameRegistry.registerTileEntity(TileRedstoneWireConnector.class, ModInfo.MOD_ID + ":" + REDSTONE_WIRE_CONNECTOR_KEY + "Tile");
     GameRegistry.registerTileEntity(TileIndustrialCokeOven.class, ModInfo.MOD_ID + ":" + INDUSTRIAL_COKE_OVEN + "Tile");
+    GameRegistry.registerTileEntity(TileHeavyFarmingStation.class, ModInfo.MOD_ID + ":" + HEAVY_FARMING_STATION + "Tile");
     GameRegistry.registerTileEntity(TileItemRobin.class, ModInfo.MOD_ID + ":" + ITEM_ROBIN_KEY + "Tile");
 
     if (ImmersiveIntegration.cfg.enableAE) registerAE2(false);
@@ -77,6 +82,7 @@ public class IIBlocks {
     GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(steelDecoration, 8, 0), "ibi", "sbs", "ibi", 's', new ItemStack(IEContent.itemMaterial, 1, 12), 'b', Items.bucket, 'i', "ingotIron"));
     GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(steelDecoration, 8, 1), "ibi", "sbs", "ibi", 's', new ItemStack(IEContent.itemMaterial, 1, 12), 'b', Items.lava_bucket, 'i', "ingotIron"));
     GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(steelDecoration, 4, 2), "ibi", "isi", "ibi", 's', new ItemStack(IEContent.itemMaterial, 1, 12), 'b', Items.bucket, 'i', "ingotIron"));
+    GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(steelDecoration, 4, 3), "iei", "sbs", "iei", 's', new ItemStack(IEContent.itemMaterial, 1, 12), 'b', Items.water_bucket, 'i', "ingotIron", 'e', Items.bucket));
     GameRegistry.addRecipe(new ShapedOreRecipe(itemRobin, " r ", "scs", " r ", 's', new ItemStack(IEContent.itemMaterial, 1, 12), 'r', "dustRedstone", 'c', new ItemStack(IEContent.blockWoodenDevice, 1, 4)));
 
     if (ImmersiveIntegration.cfg.enableAE) registerAE2(true);

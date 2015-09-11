@@ -25,6 +25,8 @@ tile.immersiveintegration:steelDecorationOvenWall.name=Coke Oven Wall
 tile.immersiveintegration:steelDecorationOvenWallHeated.name=Heated Coke Oven Wall
 tile.immersiveintegration:steelDecorationOvenWallPort.name=Coke Oven Port
 
+tile.immersiveintegration:steelDecorationFarmerWaterSprinkler.name=Water Sprinkler
+
 item.immersiveintegration:iiWireCoilRedstone.name=Redstone Wire Coil
 
 

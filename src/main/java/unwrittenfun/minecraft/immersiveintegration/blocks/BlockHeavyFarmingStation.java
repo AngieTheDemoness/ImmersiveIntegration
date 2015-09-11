@@ -15,15 +15,17 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 import unwrittenfun.minecraft.immersiveintegration.ImmersiveIntegration;
+import unwrittenfun.minecraft.immersiveintegration.client.renderers.BlockRenderHeavyFarmingStation;
 import unwrittenfun.minecraft.immersiveintegration.client.renderers.BlockRenderIndustrialCokeOven;
 import unwrittenfun.minecraft.immersiveintegration.tiles.IMultiblockTile;
-import unwrittenfun.minecraft.immersiveintegration.tiles.TileIndustrialCokeOven;
+import unwrittenfun.minecraft.immersiveintegration.tiles.TileHeavyFarmingStation;
+import unwrittenfun.minecraft.immersiveintegration.tiles.TileHeavyFarmingStation;
 
 import java.util.ArrayList;
 
-public class BlockIndustrialCokeOven extends BlockContainer {
+public class BlockHeavyFarmingStation extends BlockContainer {
 
-  protected BlockIndustrialCokeOven(String key) {
+  protected BlockHeavyFarmingStation(String key) {
     super(Material.iron);
     setBlockName(key);
     setBlockTextureName(key);
@@ -33,16 +35,16 @@ public class BlockIndustrialCokeOven extends BlockContainer {
 
   @Override
   public TileEntity createNewTileEntity(World world, int meta) {
-    return new TileIndustrialCokeOven();
+    return new TileHeavyFarmingStation();
   }
 
   @Override
   public ItemStack getPickBlock(MovingObjectPosition target, World world, int x, int y, int z, EntityPlayer player) {
     TileEntity tileEntity = world.getTileEntity(target.blockX, target.blockY, target.blockZ);
-    if (tileEntity instanceof TileIndustrialCokeOven) {
-      TileIndustrialCokeOven industrialCokeOven = (TileIndustrialCokeOven) tileEntity;
-      if (industrialCokeOven.getReplaced() != null) {
-        return industrialCokeOven.getReplaced().copy();
+    if (tileEntity instanceof TileHeavyFarmingStation) {
+      TileHeavyFarmingStation heavyFarmingStation = (TileHeavyFarmingStation) tileEntity;
+      if (heavyFarmingStation.getReplaced() != null) {
+        return heavyFarmingStation.getReplaced().copy();
       }
     }
     return new ItemStack(IIBlocks.steelDecoration);
@@ -65,7 +67,7 @@ public class BlockIndustrialCokeOven extends BlockContainer {
 
   @Override
   public int getRenderType() {
-    return BlockRenderIndustrialCokeOven.RENDER_ID;
+    return BlockRenderHeavyFarmingStation.RENDER_ID;
   }
 
   @Override
@@ -113,10 +115,10 @@ public class BlockIndustrialCokeOven extends BlockContainer {
   public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ) {
     if (!world.isRemote) {
       TileEntity tileEntity = world.getTileEntity(x, y, z);
-      if (tileEntity instanceof TileIndustrialCokeOven) {
-        TileIndustrialCokeOven cokeOven = (TileIndustrialCokeOven) tileEntity;
-        if (cokeOven.formed) {
-          int[] off = cokeOven.getOffset();
+      if (tileEntity instanceof TileHeavyFarmingStation) {
+        TileHeavyFarmingStation farmingStation = (TileHeavyFarmingStation) tileEntity;
+        if (farmingStation.formed) {
+          int[] off = farmingStation.getOffset();
           FMLNetworkHandler.openGui(player, ImmersiveIntegration.instance, 0, world, x - off[0], y - off[1], z - off[2]);
         }
       }
