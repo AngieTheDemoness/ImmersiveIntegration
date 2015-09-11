@@ -4,3 +4,8 @@ run/
 libs/
 top_secret_ideas.txt
 design/
+out/
+gradle/
+*.ipr
+*.iws
+gradlew*
