@@ -3,6 +3,7 @@ package unwrittenfun.minecraft.immersiveintegration.blocks;
 import appeng.api.AEApi;
 import appeng.api.definitions.IDefinitions;
 import appeng.api.util.AEColor;
+import blusunrize.immersiveengineering.api.energy.DieselHandler;
 import blusunrize.immersiveengineering.common.IEContent;
 import blusunrize.immersiveengineering.common.blocks.metal.BlockMetalDecoration;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -11,6 +12,7 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
+import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import unwrittenfun.minecraft.immersiveintegration.ImmersiveIntegration;
 import unwrittenfun.minecraft.immersiveintegration.ModInfo;
@@ -83,10 +85,11 @@ public class IIBlocks {
     fluidIndustrialFertiliser = FluidRegistry.getFluid("industrialfertilizer");
     if(fluidIndustrialFertiliser==null)
     {
-      fluidIndustrialFertiliser = new Fluid("industrialfertilizer").setDensity(789).setViscosity(1000);
+      fluidIndustrialFertiliser = new Fluid("industrialfertilizer").setDensity(1000).setViscosity(1000);
       FluidRegistry.registerFluid(fluidIndustrialFertiliser);
       IIIndustrialFertiliser=true;
     }
+    DieselHandler.addRefineryRecipe(new FluidStack(IEContent.fluidPlantoil, 8), new FluidStack(FluidRegistry.WATER, 8), new FluidStack(fluidIndustrialFertiliser, 16));
   }
 
   public static void registerRecipes() {

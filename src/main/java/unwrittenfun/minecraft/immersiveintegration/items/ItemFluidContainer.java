@@ -14,7 +14,6 @@ public class ItemFluidContainer extends ItemIEBase
     setUnlocalizedName(ModInfo.MOD_ID + ":" + name);
     setCreativeTab(ImmersiveIntegration.iiCreativeTab);
   }
-
   @Override
   public void registerIcons(IIconRegister ir) {
     for(int i = 0; i < this.icons.length; ++i) {
@@ -38,3 +37,4 @@ public class ItemFluidContainer extends ItemIEBase
     return stack.getItemDamage()%2==0?16:1;
   }
 }
+

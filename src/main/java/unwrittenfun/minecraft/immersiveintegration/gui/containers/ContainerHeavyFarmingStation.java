@@ -29,13 +29,12 @@ public class ContainerHeavyFarmingStation extends Container {
       addSlotToContainer(new Slot(inventoryPlayer, i, 8 + i * 18, 143));
     }
 
-    for (int i = 0; i < 4; i++) {
-      addSlotToContainer(new SlotValid(farmingStation, i * 2, 14 + 28 * i, 13));
-      addSlotToContainer(new SlotValid(farmingStation, i * 2 + 1, 14 + 28 * i, 55));
+    for (int i = 0; i < 3; i++) {
+      for (int j = 0; j < 3; j++) {
+        addSlotToContainer(new SlotValid(farmingStation, i + j, j * 18 + 9, i * 18 + 16));
+        addSlotToContainer(new SlotValid(farmingStation, i + j, j * 18 + 74, i * 18 + 16));
+      }
     }
-
-    addSlotToContainer(new SlotValid(farmingStation, 8, 146, 17));
-    addSlotToContainer(new SlotValid(farmingStation, 9, 146, 53));
   }
 
   @Override
@@ -99,21 +98,6 @@ public class ContainerHeavyFarmingStation extends Container {
           ((ICrafting) crafter).sendProgressBarUpdate(this, i, prevProgressValues[i]);
         }
       }
-    }
-  }
-
-  @Override
-  public void updateProgressBar(int id, int value) {
-    switch (id) {
-      case 0:
-      case 1:
-      case 2:
-      case 3:
-        farmingStation.clientProgress[id] = value;
-        break;
-      case 4:
-        farmingStation.clientFluidAmount = value;
-        break;
     }
   }
 }
