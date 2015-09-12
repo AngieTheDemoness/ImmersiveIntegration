@@ -101,6 +101,10 @@ public class BlockHeavyFarmingStation extends BlockContainer {
                   if (replaced != null) {
                     world.setBlock(x + ddx - offset[0], y + dy - offset[1], z + ddz - offset[2], ((ItemBlock) replaced.getItem()).field_150939_a, replaced.getItemDamage(), 3);
                   }
+                  else
+                  {
+                    world.setBlockToAir(x + ddx - offset[0], y + dy - offset[1], z + ddz - offset[2]);
+                  }
                 }
               }
             }

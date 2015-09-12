@@ -5,8 +5,9 @@
     "version": "${version}",
     "mcversion": "${mcversion}",
     "authorList": [
-      "UnwrittenFun"
+      "UnwrittenFun", "AngieTheDemoness"
     ],
+    "credits": "bakaxyf and UUUii for translations",
     "description": "Integrates IE with other mods, as well as some useful addition to IE itself",
     "url" : "https://github.com/UnwrittenFun/ImmersiveIntegration",
     "updateUrl" : "",

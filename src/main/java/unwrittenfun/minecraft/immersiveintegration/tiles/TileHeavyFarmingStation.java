@@ -302,7 +302,7 @@ public class TileHeavyFarmingStation extends TileEntity implements IMultiblockTi
 
   @Override
   public String getInventoryName() {
-    return "Industrial Coke Oven";
+    return "Heavy Farming Station";
   }
 
   @Override
