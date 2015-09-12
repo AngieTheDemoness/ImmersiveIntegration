@@ -9,9 +9,11 @@ import cpw.mods.fml.common.network.NetworkRegistry;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
 import org.apache.logging.log4j.Logger;
 import unwrittenfun.minecraft.immersiveintegration.blocks.IIBlocks;
+import unwrittenfun.minecraft.immersiveintegration.client.ClientEventHandler;
 import unwrittenfun.minecraft.immersiveintegration.compat.CCCompat;
 import unwrittenfun.minecraft.immersiveintegration.gui.GuiHandler;
 import unwrittenfun.minecraft.immersiveintegration.items.IIItems;
@@ -47,10 +49,12 @@ public class ImmersiveIntegration {
     IIWires.registerWires();
 
     IIBlocks.registerBlocks();
+    IIBlocks.registerFluids();
     IIItems.registerItems();
 
     proxy.registerRenderers();
     FMLCommonHandler.instance().bus().register(cfg);
+    MinecraftForge.EVENT_BUS.register(new ClientEventHandler());
 
     Special.preInit();
 

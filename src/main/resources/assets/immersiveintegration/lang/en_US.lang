@@ -30,6 +30,10 @@ tile.immersiveintegration:steelDecorationFarmerWaterSprinkler.name=Water Sprinkl
 
 item.immersiveintegration:iiWireCoilRedstone.name=Redstone Wire Coil
 
+item.immersiveintegration:fluidContainer.BottleIndustrialFertiliser.name=Bottle of Industrial Fertilizer
+item.immersiveintegration:fluidContainer.BucketIndustrialFertiliser.name=Bucket of Industrial Fertilizer
+fluid.industrialfertilizer=Industrial Fertilizer
+
 
 # Tooltips
 immersiveintegration.tooltip.safe=Safe for decoration

@@ -9,6 +9,8 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import unwrittenfun.minecraft.immersiveintegration.ImmersiveIntegration;
 import unwrittenfun.minecraft.immersiveintegration.ModInfo;
@@ -47,6 +49,8 @@ public class IIBlocks {
   public static BlockHeavyFarmingStation heavyFarmingStation;
   public static Block itemRobin;
   public static Block steelDecoration;
+  public static Fluid fluidIndustrialFertiliser;
+  public static boolean IIIndustrialFertiliser = false;
 
   public static void registerBlocks() {
     extendedPost = new BlockExtendedPost(ModInfo.MOD_ID + ":" + EXTENDED_POST_KEY);
@@ -72,6 +76,17 @@ public class IIBlocks {
     GameRegistry.registerTileEntity(TileItemRobin.class, ModInfo.MOD_ID + ":" + ITEM_ROBIN_KEY + "Tile");
 
     if (ImmersiveIntegration.cfg.enableAE) registerAE2(false);
+  }
+
+  public static void registerFluids() {
+
+    fluidIndustrialFertiliser = FluidRegistry.getFluid("industrialfertilizer");
+    if(fluidIndustrialFertiliser==null)
+    {
+      fluidIndustrialFertiliser = new Fluid("industrialfertilizer").setDensity(789).setViscosity(1000);
+      FluidRegistry.registerFluid(fluidIndustrialFertiliser);
+      IIIndustrialFertiliser=true;
+    }
   }
 
   public static void registerRecipes() {

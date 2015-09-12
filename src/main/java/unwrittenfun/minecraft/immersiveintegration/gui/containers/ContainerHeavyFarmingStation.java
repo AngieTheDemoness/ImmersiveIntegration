@@ -8,7 +8,6 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import unwrittenfun.minecraft.immersiveintegration.client.gui.SlotValid;
 import unwrittenfun.minecraft.immersiveintegration.tiles.TileHeavyFarmingStation;
-import unwrittenfun.minecraft.immersiveintegration.tiles.TileIndustrialCokeOven;
 
 public class ContainerHeavyFarmingStation extends Container {
   public TileHeavyFarmingStation farmingStation;

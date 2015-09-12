@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GuiHeavyFarmingStation extends GuiContainer {
-  public static final ResourceLocation texture = new ResourceLocation(ModInfo.MOD_ID, "textures/gui/industrialCokeOven.png");
+  public static final ResourceLocation texture = new ResourceLocation(ModInfo.MOD_ID, "textures/gui/heavyFarmingStation.png");
   public ContainerHeavyFarmingStation container;
 
   public GuiHeavyFarmingStation(ContainerHeavyFarmingStation container) {
